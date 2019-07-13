@@ -37,7 +37,12 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 #, '~> 1.0', '>= 1.0.3'
 gem 'rack-cors'
+#devise
+gem 'devise'
+#
+gem 'simple_token_authentication', '~> 1.0'
 
+# GROUPS
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

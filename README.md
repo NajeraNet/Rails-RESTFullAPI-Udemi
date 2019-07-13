@@ -25,7 +25,7 @@ Things you may want to cover:
 
 # Application
 
-* Install rack-cors gem
+* Install gem rack-cors
 
 * Add the configuration in config/application
 
@@ -38,4 +38,39 @@ Things you may want to cover:
   end
   ```
 
-*
+# Authentication System
+
+* Install gem devise and install in the console
+
+  > rails g devise:install
+
+* Install the user mvc with devise
+
+  > rails g devise User
+
+* Run migrate
+
+  > rails db:migrate
+
+* Setting up the authentication token
+
+  - install the gem simple authentication, watch this [LINK](https://github.com/gonzalo-bulnes/simple_token_authentication)
+
+  - In the model user.rb add..
+
+    ```ruby
+      acts_as_token_authenticatable
+    ```
+
+  - And make the migration
+
+    >rails g migration add_authentication_token_to_users "authentication_token:string{30}:uniq"
+
+  - Run migration
+
+  - Check in the console rails if there are the field authentication_token
+
+    > rails c
+    User.column_names
+
+  -
