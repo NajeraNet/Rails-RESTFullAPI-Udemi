@@ -159,9 +159,38 @@
     end
   ```
 
-  - Got to Postman application and test the API, choose post, set the URL 'localhost:3000/api/v1/sign_up' select body and fill the camps with the information like: "user[email], user[password], user[password_confirmation]" and hit the buttom "SEND"
+# Testing API with POSTMAN
 
+  * Got to Postman application and select choose post
   
+  * set the URL 'localhost:3000/api/v1/sign_up' and select body and fill the fields with the information like:
+    - user[email]
+    
+    - user[password]
+    
+    - user[password_confirmation]
+    
+    * And hit SEND buttom
+
+  * the output should looks like: 
+
+    ```json 
+      {
+        "messages": "Signed Up successfully",
+        "is_success": true,
+        "data": {
+          "user": {
+            "id": 1,
+            "email": "user@mail.com",
+            "created_at": "20xx-xx-16T15:57:30.418Z",
+            "updated_at": "20xx-xx-16T15:57:30.418Z",
+            "authentication_token": "xxXxXXxxXxxXxxXXx"
+          }
+        }
+      }
+    ```
+
+
 
 
   

@@ -22,6 +22,6 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
     #code
     return if params[:user].present?
       json_response "Missing Params", false, {}, :bad_request
-    
+      
   end
 end
