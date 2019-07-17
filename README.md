@@ -190,7 +190,71 @@
       }
     ```
 
+# Sign In API 
 
+  * Create the file app/controllers/sessions_controller.rb
 
+    ```ruby
+      class Api::V1::SessionsController < Devise::SessionsController
+        before_action :sign_in_params, only: :create
+        before_action :load_user, only: :create
+        #
+        skip_before_action :verify_authenticity_token
 
-  
+        #sign in
+        def create
+          if @user.valid_password?(sign_in_params[:password])
+            sign_in "user", @user
+            json_response "Signed In Successfully", true, {user: @user}, :ok
+          else
+            json_response "Unauthorized", false, {}, :unauthorized
+          end
+        end
+
+        private
+        def sign_in_params
+          params.require(:sign_in).permit(:email, :password)
+        end
+
+        #load user
+        def load_user
+          @user = User.find_for_database_authentication(email: sign_in_params[:email])
+          if @user
+            return @user
+          else
+            json_response "Cannot get User", false, {}, :failure
+          end  
+        end
+      end
+    ```
+
+  * Modify the routes file and add the api direction
+
+    ```ruby
+      post "sign_in", to: "sessions#create"
+    ```
+
+  * Run a test on postman
+
+    - sign_in[email]
+
+    - sign_in[password]
+
+  * The output should looks like this:
+
+  ```json
+    {
+    "messages": "Signed In Successfully",
+      "is_success": true,
+      "data": {
+        "user": {
+          "id": 2,
+          "email": "test@mail.com",
+          "created_at": "2019-07-17T06:56:21.181Z",
+          "updated_at": "2019-07-17T06:56:21.181Z",
+          "authentication_token": "oww_Yjnfr2wYS6QRtMYp"
+        }
+      }
+    }  
+
+# Log out API
